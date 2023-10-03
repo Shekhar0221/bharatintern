@@ -1,2 +1,54 @@
-# bharatintern
-web page
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag and Drop Blog Builder</title>
+    <style>
+        #container {
+            width: 80%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .draggable {
+            border: 1px dashed #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Blog Builder</h1>
+        <div class="draggable" draggable="true" ondragstart="drag(event)">Drag me (Text)</div>
+        <div class="draggable" draggable="true" ondragstart="drag(event)">
+            <img src="placeholder-image.jpg" alt="Image" width="200" height="150">
+        </div>
+        <div class="draggable" draggable="true" ondragstart="drag(event)">
+            <iframe width="300" height="200" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div id="dropzone" ondrop="drop(event)" ondragover="allowDrop(event)">
+            Drop here to add elements
+        </div>
+    </div>
+
+  <script>
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+
+        function drag(event) {
+            event.dataTransfer.setData("text", event.target.outerHTML);
+        }
+
+        function drop(event) {
+            event.preventDefault();
+            var data = event.dataTransfer.getData("text");
+            var dropzone = event.target;
+            dropzone.innerHTML += data;
+        }
+    </script>
+</body>
+</html>
